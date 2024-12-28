@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milon Juice Shop - Order</title>
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        .navbar li {
+            margin: 0 15px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: #333;
+            font-family: 'Lobster', cursive;
+            font-size: 1.2em;
+        }
+
+        .navbar a:hover {
+            color: #2196f3;
+        }
+
+        .screen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+            text-align: center;
+            padding-top: 80px; /* To avoid overlap with navbar */
+            background: url('home-background.jpg') no-repeat center center;
+            background-size: cover;
+            background-attachment: scroll; /* Ensure the background scrolls with the content */
+        }
+
+        .order-form {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            max-width: 800px;
+            margin: 20px;
+            text-align: left;
+        }
+
+        .order-form h2 {
+            font-family: 'Lobster', cursive;
+            color: #ff5722;
+            margin-bottom: 20px;
+        }
+
+        .order-form label {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            font-size: 1.1em;
+            color: #333;
+        }
+
+        .order-form input[type="checkbox"] {
+            margin-right: 15px;
+            transform: scale(1.2);
+        }
+
+        .order-form .button-container {
+            text-align: center;
+            margin-top: 20px;
+            position: relative;
+            top: 0.3cm;
+        }
+
+        .order-form button {
+            background-color: #ff5722;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.2em;
+            transition: background-color 0.3s ease;
+        }
+
+        .order-form button:hover {
+            background-color: #e64a19;
+        }
+
+        .total-amount {
+            font-size: 1.5em;
+            color: #ff5722;
+            margin-top: 20px;
+            font-weight: bold;
+            position: relative; /* Positioning context for adjustments */
+            top: 1cm;
+        }
+
+        .cart-items {
+            margin-top: 10px;
+            position: relative; /* Positioning context for adjustments */
+            top: 0.4cm;
+        }
+
+        .cart-items ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .cart-items li {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            font-size: 1.1em;
+            color: #333;
+        }
+
+        .cart-items button {
+            background-color: #ff5722;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+
+        .cart-items button:hover {
+            background-color: #e64a19;
+        }
+
+        .fun-message {
+            font-size: 1.5em;
+            color: #ff5722;
+            margin-top: 30px;
+            font-family: 'Lobster', cursive;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            position: relative; /* Positioning context for top adjustment */
+            top: -0.8cm;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </div>
+
+    <div id="order-screen" class="screen">
+        <div class="order-form">
+            <h2>Order Now</h2>
+            <form id="order-form">
+                <!-- Classic Juices -->
+                <label><input type="checkbox" class="item" data-price="50.00"> Orange Juice - ₹50.00</label>
+                <label><input type="checkbox" class="item" data-price="40.00"> Apple Juice - ₹40.00</label>
+                <label><input type="checkbox" class="item" data-price="30.00"> Carrot Juice - ₹30.00</label>
+                <label><input type="checkbox" class="item" data-price="40.00"> Pineapple Juice - ₹40.00</label>
+                
+                <!-- Exotic Juices -->
+                <label><input type="checkbox" class="item" data-price="60.00"> Mango Juice - ₹60.00</label>
+                <label><input type="checkbox" class="item" data-price="50.00"> Pomegranate Juice - ₹50.00</label>
+                <label><input type="checkbox" class="item" data-price="60.00"> Passion Fruit Juice - ₹60.00</label>
+                <label><input type="checkbox" class="item" data-price="40.00"> Guava Juice - ₹40.00</label>
+                
+                <!-- Blended Juices -->
+                <label><input type="checkbox" class="item" data-price="70.00"> Berry Blast - ₹70.00</label>
+                <label><input type="checkbox" class="item" data-price="70.00"> Tropical Delight - ₹70.00</label>
+                <label><input type="checkbox" class="item" data-price="50.00"> Green Smoothie - ₹50.00</label>
+                <label><input type="checkbox" class="item" data-price="40.00"> Citrus Medley - ₹40.00</label>
+                
+                <!-- Specialty Juices -->
+                <label><input type="checkbox" class="item" data-price="40.00"> Beet Juice - ₹40.00</label>
+                <label><input type="checkbox" class="item" data-price="30.00"> Cucumber Mint Juice - ₹30.00</label>
+                <label><input type="checkbox" class="item" data-price="40.00"> Watermelon Juice - ₹40.00</label>
+                <label><input type="checkbox" class="item" data-price="30.00"> Apple Ginger Juice - ₹30.00</label>
+                
+                <div class="button-container">
+                    <button type="button" onclick="showCart()">OK</button>
+                    <button type="button" onclick="goToPayment()">Next</button>
+                </div>
+            </form>
+            <div class="total-amount" id="total-amount">Total: ₹0.00</div>
+            <div class="cart-items" id="cart-items">
+                <h3>Cart</h3>
+                <ul id="cart-list">
+                    <!-- Cart items will be dynamically added here -->
+                </ul>
+            </div>
+        </div>
+
+        <div class="fun-message">
+            <p>Get your daily dose of fruitiness and fun!</p>
+        </div>
+    </div>
+
+    <script>
+        function showCart() {
+            let total = 0;
+            let cartList = document.getElementById('cart-list');
+            cartList.innerHTML = ''; // Clear previous cart items
+            let cartItems = [];
+
+            document.querySelectorAll('.order-form .item:checked').forEach(item => {
+                let price = parseFloat(item.getAttribute('data-price'));
+                let label = item.parentElement.textContent.trim().split(' - ')[0];
+                total += price;
+
+                let li = document.createElement('li');
+                li.innerHTML = `${label} - ₹${price.toFixed(2)} <button onclick="removeFromCart(this)">-</button>`;
+                cartList.appendChild(li);
+
+                cartItems.push({ label: label, price: price });
+            });
+
+            document.getElementById('total-amount').textContent = `Total: ₹${total.toFixed(2)}`;
+        }
+
+        function goToPayment() {
+            let cartItems = [];
+            let total = 0;
+            let userId = 'user123';
+
+            document.querySelectorAll('.order-form .item:checked').forEach(item => {
+                let price = parseFloat(item.getAttribute('data-price'));
+                let label = item.parentElement.textContent.trim().split(' - ')[0];
+                total += price;
+                cartItems.push({ label: label, price: price });
+            });
+
+            sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
+            sessionStorage.setItem('total', total.toFixed(2));
+
+            fetch('http://localhost:3000/orders', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    userId: userId,
+                    items: cartItems,
+                    total: total
+                })
+            })
+            .then(response => response.json())
+            .then(() => {
+                window.location.href = 'payment.html';
+            })
+            .catch(error => console.error('Error:', error));
+             window.location.href = 'payment.html';
+        }
+        
+
+        function removeFromCart(button) {
+            let listItem = button.parentElement;
+            let label = listItem.textContent.split(' - ')[0].trim();
+
+            document.querySelectorAll('.order-form .item:checked').forEach(item => {
+                if (item.parentElement.textContent.trim().split(' - ')[0] === label) {
+                    item.checked = false;
+                }
+            });
+
+            showCart();
+        }
+    </script>
+</body>
+</html>

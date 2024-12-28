@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milon Juice Shop - About</title>
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background: url('welcome-background1.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        .navbar li {
+            margin: 0 15px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: #333;
+            font-family: 'Lobster', cursive;
+            font-size: 1.2em;
+        }
+
+        .navbar a:hover {
+            color: #2196f3;
+        }
+
+        #profile-info, #order-history {
+            margin: 100px auto 20px auto;
+            max-width: 800px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        #profile-info h2, #order-history h3 {
+            font-family: 'Lobster', cursive;
+            color: #ff5722;
+        }
+
+        #profile-info p, #order-history li {
+            font-size: 1.1em;
+            color: #333;
+        }
+
+        #order-history ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #order-history li {
+            margin: 10px 0;
+        }
+
+        .profile-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+        }
+
+        .profile-item span {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </div>
+
+    <div id="profile-info">
+        <h2>User Profile</h2>
+        <div class="profile-item"><span>Email:</span> <span id="user-name">Loading...</span></div>
+    </div>
+    <div id="order-history">
+        <h3>Order History</h3>
+        <ul id="order-list">
+            <!-- Order history will be loaded here -->
+        </ul>
+    </div>
+
+    <script>
+        function loadProfile() {
+            const userEmail = localStorage.getItem('user');
+            if (userEmail) {
+                document.getElementById('user-name').textContent = userEmail;
+            }
+
+            const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+            const orderList = document.getElementById('order-list');
+            orderList.innerHTML = '';
+
+            orders.forEach(order => {
+                const orderItem = document.createElement('li');
+                orderItem.textContent = `Order: ₹${order.totalAmount}`;
+                orderList.appendChild(orderItem);
+            });
+        }
+
+        window.onload = loadProfile;
+    </script>
+</body>
+</html>
